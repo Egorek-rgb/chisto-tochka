@@ -1,0 +1,991 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Чисто&Точка — клининговая студия в Краснодаре. Заявка уходит в MAX на +7 938 485-20-78."
+    />
+    <title>Чисто&Точка — клининг как ритуал чистоты</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@500;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #07110c;
+        --moss: #13241c;
+        --leaf: #1e3d2e;
+        --acid: #c8f54a;
+        --acid-2: #9dff6a;
+        --blush: #ff8a6a;
+        --bone: #f4efe4;
+        --mist: rgba(244, 239, 228, 0.62);
+        --line: rgba(200, 245, 74, 0.18);
+        --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      html,
+      body {
+        background: var(--void);
+        color: var(--bone);
+      }
+      body {
+        font-family: "Syne", system-ui, sans-serif;
+        line-height: 1.45;
+        overflow-x: hidden;
+        cursor: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      a {
+        color: inherit;
+        text-align: inherit;
+        text-decoration: none;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font-family: inherit;
+      }
+      .grain {
+        pointer-events: none;
+        position: fixed;
+        inset: 0;
+        z-index: 80;
+        opacity: 0.14;
+        mix-blend-mode: overlay;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      }
+      .cursor {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--acid);
+        pointer-events: none;
+        z-index: 200;
+        mix-blend-mode: difference;
+        transform: translate(-50%, -50%);
+        transition: width 0.25s var(--ease), height 0.25s var(--ease);
+      }
+      .cursor.grow {
+        width: 54px;
+        height: 54px;
+        background: transparent;
+        border: 1.5px solid var(--acid);
+      }
+      .blob {
+        position: fixed;
+        width: 48vw;
+        height: 48vw;
+        border-radius: 50%;
+        filter: blur(80px);
+        opacity: 0.28;
+        pointer-events: none;
+        z-index: 0;
+        animation: drift 18s ease-in-out infinite alternate;
+      }
+      .blob.a {
+        background: #1f6a3a;
+        top: -12%;
+        left: -10%;
+      }
+      .blob.b {
+        background: #6a2a16;
+        right: -12%;
+        bottom: 10%;
+        animation-delay: -6s;
+      }
+      @keyframes drift {
+        to {
+          transform: translate(8%, 10%) scale(1.15);
+        }
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 40;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 18px 28px;
+        background: color-mix(in srgb, var(--void) 72%, transparent);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        font-size: 1.05rem;
+      }
+      .mark {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: var(--acid);
+        color: var(--void);
+        font-family: "Instrument Serif", serif;
+        font-size: 1.4rem;
+        animation: spinMark 12s linear infinite;
+      }
+      @keyframes spinMark {
+        0%,
+        70% {
+          transform: rotate(-8deg);
+        }
+        100% {
+          transform: rotate(352deg);
+        }
+      }
+      nav {
+        display: flex;
+        gap: 22px;
+        font-size: 0.82rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      nav a {
+        opacity: 0.72;
+        position: relative;
+      }
+      nav a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -4px;
+        width: 0;
+        height: 1px;
+        background: var(--acid);
+        transition: width 0.35s var(--ease);
+      }
+      nav a:hover {
+        opacity: 1;
+      }
+      nav a:hover::after {
+        width: 100%;
+      }
+      .nav-cta,
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        border: 0;
+        border-radius: 999px;
+        padding: 12px 22px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        background: var(--acid);
+        color: var(--void);
+        cursor: none;
+        transition: transform 0.35s var(--ease), box-shadow 0.35s;
+      }
+      .nav-cta:hover,
+      .btn:hover {
+        transform: translateY(-2px) scale(1.02);
+        box-shadow: 0 12px 40px rgba(200, 245, 74, 0.28);
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--bone);
+        border: 1px solid var(--line);
+      }
+      .burger {
+        display: none;
+        background: none;
+        border: 0;
+        color: var(--bone);
+        font-size: 1.6rem;
+        cursor: none;
+      }
+      .hero {
+        position: relative;
+        z-index: 1;
+        min-height: calc(100svh - 78px);
+        display: grid;
+        grid-template-columns: 1.2fr 0.8fr;
+        gap: 32px;
+        padding: 48px 28px 28px;
+        align-items: end;
+      }
+      .kicker {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.72rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--acid);
+        margin-bottom: 18px;
+      }
+      .pulse {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--acid);
+        box-shadow: 0 0 0 0 rgba(200, 245, 74, 0.6);
+        animation: pulse 1.8s infinite;
+      }
+      @keyframes pulse {
+        70% {
+          box-shadow: 0 0 0 12px transparent;
+        }
+      }
+      h1 {
+        font-family: "Instrument Serif", serif;
+        font-weight: 400;
+        font-size: clamp(3.2rem, 8.4vw, 8.4rem);
+        line-height: 0.86;
+        letter-spacing: -0.04em;
+      }
+      h1 em {
+        font-style: italic;
+        color: var(--acid);
+        display: inline-block;
+        animation: tilt 4.5s ease-in-out infinite;
+      }
+      @keyframes tilt {
+        50% {
+          transform: rotate(-3deg) translateY(4px);
+        }
+      }
+      .hero p.lead {
+        max-width: 34rem;
+        margin: 22px 0 28px;
+        color: var(--mist);
+        font-size: 1.05rem;
+      }
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .hero-card {
+        position: relative;
+        padding: 28px;
+        border-radius: 28px;
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+        border: 1px solid var(--line);
+        backdrop-filter: blur(18px);
+        overflow: hidden;
+      }
+      .hero-card::before {
+        content: "";
+        position: absolute;
+        width: 160px;
+        height: 160px;
+        right: -40px;
+        top: -40px;
+        background: radial-gradient(circle, var(--acid), transparent 70%);
+        opacity: 0.35;
+        animation: orbit 8s linear infinite;
+      }
+      @keyframes orbit {
+        to {
+          transform: rotate(360deg) translateX(8px);
+        }
+      }
+      .price {
+        font-family: "Instrument Serif", serif;
+        font-size: 4.2rem;
+        line-height: 1;
+      }
+      .price small {
+        font-family: Syne, sans-serif;
+        font-size: 0.9rem;
+        color: var(--mist);
+      }
+      .hero-card ul {
+        list-style: none;
+        margin-top: 18px;
+        display: grid;
+        gap: 10px;
+        color: var(--mist);
+      }
+      .hero-card li {
+        display: flex;
+        gap: 10px;
+      }
+      .hero-card li::before {
+        content: "✦";
+        color: var(--acid);
+      }
+      .marquee {
+        position: relative;
+        z-index: 1;
+        border-block: 1px solid var(--line);
+        overflow: hidden;
+        background: var(--moss);
+        white-space: nowrap;
+      }
+      .marquee-track {
+        display: inline-flex;
+        gap: 48px;
+        padding: 14px 0;
+        animation: slide 22s linear infinite;
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+      @keyframes slide {
+        to {
+          transform: translateX(-50%);
+        }
+      }
+      section {
+        position: relative;
+        z-index: 1;
+        padding: 88px 28px;
+      }
+      .container {
+        max-width: 1180px;
+        margin: 0 auto;
+      }
+      .tag {
+        color: var(--acid);
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        font-size: 0.72rem;
+      }
+      h2 {
+        font-family: "Instrument Serif", serif;
+        font-size: clamp(2.2rem, 5vw, 4.4rem);
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        line-height: 0.95;
+        margin: 10px 0 36px;
+      }
+      .bento {
+        display: grid;
+        grid-template-columns: 1.4fr 1fr 1fr;
+        grid-template-rows: auto auto;
+        gap: 16px;
+      }
+      .card {
+        border-radius: 24px;
+        padding: 26px;
+        background: var(--moss);
+        border: 1px solid var(--line);
+        min-height: 220px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.5s var(--ease), background 0.4s;
+      }
+      .card.wide {
+        grid-row: span 2;
+        background: linear-gradient(180deg, #1a3a28, #0c1a14);
+      }
+      .card:hover {
+        transform: translateY(-8px) rotate(-0.4deg);
+        background: #1b3327;
+      }
+      .num {
+        font-family: "Instrument Serif", serif;
+        font-size: 2.4rem;
+        color: var(--acid);
+      }
+      .card h3 {
+        font-size: 1.35rem;
+        margin: 8px 0;
+      }
+      .card p {
+        color: var(--mist);
+        font-size: 0.95rem;
+      }
+      .card-price {
+        margin-top: 16px;
+        color: var(--acid);
+        font-weight: 700;
+      }
+      .reveal {
+        opacity: 0;
+        transform: translateY(28px);
+        animation: rise 0.9s var(--ease) forwards;
+      }
+      .reveal:nth-child(2) {
+        animation-delay: 0.08s;
+      }
+      .reveal:nth-child(3) {
+        animation-delay: 0.16s;
+      }
+      @keyframes rise {
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .acc-item {
+        border-bottom: 1px solid var(--line);
+      }
+      .acc-btn {
+        width: 100%;
+        background: none;
+        border: 0;
+        color: var(--bone);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 22px 0;
+        font-size: 1.25rem;
+        cursor: none;
+        text-align: left;
+      }
+      .plus {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--acid);
+        color: var(--acid);
+        display: grid;
+        place-items: center;
+        transition: transform 0.35s var(--ease);
+      }
+      .acc-item.open .plus {
+        transform: rotate(45deg);
+        background: var(--acid);
+        color: var(--void);
+      }
+      .acc-panel {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.45s var(--ease);
+      }
+      .acc-panel ul {
+        list-style: none;
+        padding-bottom: 18px;
+        color: var(--mist);
+        display: grid;
+        gap: 8px;
+      }
+      .team-grid,
+      .review-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+      }
+      .review-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .member,
+      .review {
+        padding: 22px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+      }
+      .avatar {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        margin-bottom: 12px;
+        background: conic-gradient(from 90deg, var(--acid), var(--blush), var(--acid));
+        color: var(--void);
+        font-weight: 800;
+        animation: spinMark 16s linear infinite;
+      }
+      .stars {
+        color: var(--acid);
+        letter-spacing: 3px;
+        margin-bottom: 10px;
+      }
+      .cta {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: start;
+      }
+      .form {
+        display: grid;
+        gap: 10px;
+        padding: 26px;
+        border-radius: 28px;
+        background: rgba(244, 239, 228, 0.04);
+        border: 1px solid var(--line);
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+      }
+      label {
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--mist);
+      }
+      input,
+      select,
+      textarea {
+        width: 100%;
+        padding: 13px 14px;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: var(--void);
+        color: var(--bone);
+        font-size: 1rem;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 2px solid var(--acid);
+      }
+      .hint {
+        color: var(--mist);
+        font-size: 0.9rem;
+        margin: 12px 0 20px;
+      }
+      .phone-link {
+        color: var(--acid);
+        font-weight: 700;
+      }
+      footer {
+        position: relative;
+        z-index: 1;
+        padding: 40px 28px 28px;
+        border-top: 1px solid var(--line);
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        gap: 24px;
+        color: var(--mist);
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%) translateY(120%);
+        background: var(--acid);
+        color: var(--void);
+        padding: 14px 18px;
+        border-radius: 999px;
+        z-index: 90;
+        font-weight: 700;
+        transition: transform 0.4s var(--ease);
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
+      .max-fab {
+        position: fixed;
+        right: 22px;
+        bottom: 22px;
+        z-index: 70;
+        width: 62px;
+        height: 62px;
+        border-radius: 22px;
+        background: var(--acid);
+        color: var(--void);
+        display: grid;
+        place-items: center;
+        font-weight: 800;
+        box-shadow: 0 16px 40px rgba(200, 245, 74, 0.3);
+        animation: bob 2.6s ease-in-out infinite;
+      }
+      @keyframes bob {
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+      @media (max-width: 960px) {
+        .hero,
+        .cta,
+        footer,
+        .bento,
+        .team-grid,
+        .review-grid {
+          grid-template-columns: 1fr;
+        }
+        .card.wide {
+          grid-row: auto;
+        }
+        nav {
+          display: none;
+          position: absolute;
+          top: 74px;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background: var(--void);
+          padding: 18px 28px 24px;
+          border-bottom: 1px solid var(--line);
+        }
+        nav.open {
+          display: flex;
+        }
+        .burger {
+          display: block;
+        }
+        .nav-cta {
+          display: none;
+        }
+        body {
+          cursor: auto;
+        }
+        .cursor {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain"></div>
+    <div class="blob a"></div>
+    <div class="blob b"></div>
+    <div class="cursor" id="cursor"></div>
+
+    <header>
+      <a class="logo" href="#top">
+        <span class="mark">Ч</span>
+        Чисто&Точка
+      </a>
+      <nav id="menu">
+        <a href="#services">Услуги</a>
+        <a href="#included">Состав</a>
+        <a href="#team">Команда</a>
+        <a href="#reviews">Отзывы</a>
+        <a href="#order">Заявка</a>
+      </nav>
+      <a class="nav-cta" href="#order">В MAX за 15 сек</a>
+      <button class="burger" id="burger" aria-label="Меню">☰</button>
+    </header>
+
+    <section class="hero" id="top">
+      <div>
+        <div class="kicker"><span class="pulse"></span> Краснодар · студия чистоты</div>
+        <h1>Уборка как <em>тишина</em> после грозы</h1>
+        <p class="lead">
+          Не клининг «для галочки» — ритуал, после которого воздух снова принадлежит вам.
+          Свои средства, выезд в день заявки, оплата после. Заявка уходит вам в MAX.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#order">Оставить заявку</a>
+          <a class="btn btn-ghost" href="#services">Смотреть меню чистоты</a>
+        </div>
+      </div>
+      <aside class="hero-card">
+        <div class="tag">Старт</div>
+        <div class="price">2 950 ₽ <small>/ визит</small></div>
+        <ul>
+          <li>Выезд в день обращения</li>
+          <li>Эко-химия и свой инвентарь</li>
+          <li>Оплата после приёмки</li>
+          <li>Гарантия переделки</li>
+        </ul>
+      </aside>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>пыль не мода</span><span>✦</span>
+        <span>кислотный блеск</span><span>✦</span>
+        <span>после ремонта — как с обложки</span><span>✦</span>
+        <span>MAX · +7 938 485-20-78</span><span>✦</span>
+        <span>пыль не мода</span><span>✦</span>
+        <span>кислотный блеск</span><span>✦</span>
+        <span>после ремонта — как с обложки</span><span>✦</span>
+        <span>MAX · +7 938 485-20-78</span><span>✦</span>
+      </div>
+    </div>
+
+    <section id="services">
+      <div class="container">
+        <span class="tag">Меню</span>
+        <h2>Три сценария чистоты</h2>
+        <div class="bento">
+          <article class="card wide reveal">
+            <div>
+              <div class="num">01</div>
+              <h3>Регулярный ритуал</h3>
+              <p>Еженедельный reset квартиры: пыль, полы, кухня, ванная — без суеты и «потом».</p>
+            </div>
+            <div>
+              <div class="card-price">от 2 950 ₽</div>
+              <a class="btn" href="#order" style="margin-top: 14px" data-service="Регулярная">Заказать</a>
+            </div>
+          </article>
+          <article class="card reveal">
+            <div class="num">02</div>
+            <h3>Генеральная</h3>
+            <p>Глубокая очистка ниш, техники и тех мест, куда обычно не заглядывают.</p>
+            <div class="card-price">от 4 500 ₽</div>
+          </article>
+          <article class="card reveal">
+            <div class="num">03</div>
+            <h3>После ремонта</h3>
+            <p>Строительная пыль, следы краски и клея — возвращаем пространство к жизни.</p>
+            <div class="card-price">от 6 000 ₽</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="included">
+      <div class="container">
+        <span class="tag">Состав</span>
+        <h2>Что уже внутри цены</h2>
+        <div class="accordion">
+          <div class="acc-item">
+            <button class="acc-btn" type="button">Комнаты <span class="plus">+</span></button>
+            <div class="acc-panel">
+              <ul>
+                <li>Пыль на доступных поверхностях, зеркала, ручки</li>
+                <li>Пылесос и влажные полы, плинтусы</li>
+                <li>Смена белья и заправка — по запросу</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button">Кухня <span class="plus">+</span></button>
+            <div class="acc-panel">
+              <ul>
+                <li>Плита, раковина, смеситель, фасады</li>
+                <li>Жир, столешницы, посуда в мойке</li>
+                <li>Пол до блеска</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button">Ванная <span class="plus">+</span></button>
+            <div class="acc-panel">
+              <ul>
+                <li>Дезинфекция сантехники</li>
+                <li>Налёт, лейки, зеркала</li>
+                <li>Пол и зоны брызг</li>
+              </ul>
+            </div>
+          </div>
+          <div class="acc-item">
+            <button class="acc-btn" type="button">Прихожая <span class="plus">+</span></button>
+            <div class="acc-panel">
+              <ul>
+                <li>Обувь аккуратно, коврик, зеркало</li>
+                <li>Пыль и ручки входной зоны</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team">
+      <div class="container">
+        <span class="tag">Люди</span>
+        <h2>Команда, которой дают ключи</h2>
+        <div class="team-grid">
+          <div class="member"><div class="avatar">А</div><h3>Анна</h3><p>47 визитов</p></div>
+          <div class="member"><div class="avatar">М</div><h3>Мария</h3><p>130 визитов</p></div>
+          <div class="member"><div class="avatar">Е</div><h3>Елена</h3><p>62 визита</p></div>
+          <div class="member"><div class="avatar">О</div><h3>Ольга</h3><p>93 визита</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="container">
+        <span class="tag">Эхо</span>
+        <h2>Клиенты говорят шёпотом — и пятёрками</h2>
+        <div class="review-grid">
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>«Квартира дышит. Закажу ещё — уже поставила напоминание.»</p>
+            <p style="margin-top: 12px; color: var(--mist)">— Артём, Краснодар</p>
+          </article>
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>«Вовремя, тихо, без химического флёра. Редкий сервис.»</p>
+            <p style="margin-top: 12px; color: var(--mist)">— Наталья, Краснодар</p>
+          </article>
+          <article class="review">
+            <div class="stars">★★★★★</div>
+            <p>«Генеральная после ремонта — как будто заехали заново.»</p>
+            <p style="margin-top: 12px; color: var(--mist)">— Елена, Краснодар</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="order">
+      <div class="container cta">
+        <div>
+          <span class="tag">MAX</span>
+          <h2>Заявка улетает в мессенджер</h2>
+          <p class="hint">
+            MAX не открывает чат по номеру как WhatsApp. Мы собираем текст заявки, копируем его
+            и открываем MAX с готовым сообщением — отправьте его на
+            <a class="phone-link" href="tel:+79384852078">+7 938 485-20-78</a>
+            (8 938 485-20-78). Если чат не выбран автоматически, найдите контакт по номеру.
+          </p>
+          <a class="btn" id="maxQuick" href="#">Быстро написать в MAX</a>
+        </div>
+        <form class="form" id="lead">
+          <label for="name">Имя</label>
+          <input id="name" name="name" required placeholder="Как к вам обращаться" />
+          <label for="phone">Ваш телефон</label>
+          <input id="phone" name="phone" type="tel" required placeholder="+7 (___) ___-__-__" />
+          <label for="type">Тип уборки</label>
+          <select id="type" name="type">
+            <option>Регулярная</option>
+            <option>Генеральная</option>
+            <option>После ремонта</option>
+          </select>
+          <label for="when">Когда удобно</label>
+          <input id="when" name="when" placeholder="Сегодня вечером / дата" />
+          <label for="note">Комментарий</label>
+          <textarea id="note" name="note" rows="3" placeholder="Адрес, метраж, пожелания"></textarea>
+          <button class="btn" type="submit">Отправить в MAX</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div>
+        <strong style="color: var(--bone)">Чисто&Точка</strong>
+        <p>Клининговая студия, Краснодар. Заявки — только в MAX.</p>
+      </div>
+      <div>
+        <a href="tel:+79384852078">+7 938 485-20-78</a><br />
+        <a href="https://max.ru/:share?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%2C%20%D1%85%D0%BE%D1%87%D1%83%20%D1%83%D0%B1%D0%BE%D1%80%D0%BA%D1%83" target="_blank" rel="noopener">Открыть MAX</a>
+      </div>
+      <div>
+        <a href="#services">Услуги</a><br />
+        <a href="#order">Заявка</a>
+      </div>
+    </footer>
+
+    <a class="max-fab" id="maxFab" href="#" aria-label="Написать в MAX">MAX</a>
+    <div class="toast" id="toast">Сообщение скопировано · открываю MAX</div>
+
+    <script>
+      const MAX_PHONE = "+79384852078";
+      const MAX_PHONE_HUMAN = "+7 938 485-20-78";
+
+      const burger = document.getElementById("burger");
+      const menu = document.getElementById("menu");
+      burger.addEventListener("click", () => menu.classList.toggle("open"));
+      menu.querySelectorAll("a").forEach((a) =>
+        a.addEventListener("click", () => menu.classList.remove("open")),
+      );
+
+      document.querySelectorAll(".acc-btn").forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const item = btn.parentElement;
+          const panel = item.querySelector(".acc-panel");
+          const open = item.classList.contains("open");
+          document.querySelectorAll(".acc-item").forEach((i) => {
+            i.classList.remove("open");
+            i.querySelector(".acc-panel").style.maxHeight = null;
+          });
+          if (!open) {
+            item.classList.add("open");
+            panel.style.maxHeight = panel.scrollHeight + "px";
+          }
+        });
+      });
+
+      const cursor = document.getElementById("cursor");
+      if (window.matchMedia("(pointer: fine)").matches) {
+        window.addEventListener("pointermove", (e) => {
+          cursor.style.left = e.clientX + "px";
+          cursor.style.top = e.clientY + "px";
+        });
+        document.querySelectorAll("a, button, input, select, textarea").forEach((el) => {
+          el.addEventListener("pointerenter", () => cursor.classList.add("grow"));
+          el.addEventListener("pointerleave", () => cursor.classList.remove("grow"));
+        });
+      }
+
+      function buildMessage(extra) {
+        const name = document.getElementById("name").value.trim() || "гость сайта";
+        const phone = document.getElementById("phone").value.trim() || "не указан";
+        const type = document.getElementById("type").value;
+        const when = document.getElementById("when").value.trim() || "по согласованию";
+        const note = document.getElementById("note").value.trim() || "—";
+        return [
+          "Заявка с сайта Чисто&Точка",
+          "Кому: " + MAX_PHONE_HUMAN,
+          "",
+          "Имя: " + name,
+          "Телефон клиента: " + phone,
+          "Услуга: " + type,
+          "Когда: " + when,
+          "Комментарий: " + note,
+          extra || "",
+        ]
+          .filter(Boolean)
+          .join("\n");
+      }
+
+      function openMax(text) {
+        const encoded = encodeURIComponent(text);
+        const url = "https://max.ru/:share?text=" + encoded;
+        try {
+          navigator.clipboard.writeText(text);
+        } catch (_) {}
+        const toast = document.getElementById("toast");
+        toast.classList.add("show");
+        setTimeout(() => toast.classList.remove("show"), 3200);
+        window.open(url, "_blank", "noopener");
+      }
+
+      document.getElementById("lead").addEventListener("submit", (e) => {
+        e.preventDefault();
+        openMax(buildMessage());
+      });
+
+      function quickHello() {
+        openMax(
+          "Здравствуйте! Хочу заказать уборку у Чисто&Точка. Это сообщение для " +
+            MAX_PHONE_HUMAN +
+            ".",
+        );
+      }
+      document.getElementById("maxQuick").addEventListener("click", (e) => {
+        e.preventDefault();
+        quickHello();
+      });
+      document.getElementById("maxFab").addEventListener("click", (e) => {
+        e.preventDefault();
+        quickHello();
+      });
+
+      document.querySelectorAll("[data-service]").forEach((el) => {
+        el.addEventListener("click", () => {
+          document.getElementById("type").value = el.dataset.service;
+        });
+      });
+    </script>
+  </body>
+</html>
